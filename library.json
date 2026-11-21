@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "EquaForgeAerospace",
+  "name": "Aerospace",
+  "version": "0.1.0",
+  "minAppVersion": "0.0.3",
+  "license": "NOASSERTION",
+  "dependencies": [
+    "EquaForgeVC"
+  ],
+  "examples": [
+    "examples"
+  ],
+  "distributionFiles": [
+    "package.mo",
+    "library.json",
+    "README.md",
+    "Resources",
+    "examples",
+    "docs"
+  ]
+}

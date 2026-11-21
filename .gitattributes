@@ -1,0 +1,3 @@
+# Text in the repository with LF endings; pictures as they are.
+* text=auto eol=lf
+*.png binary

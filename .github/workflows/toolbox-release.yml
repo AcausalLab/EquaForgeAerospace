@@ -1,0 +1,83 @@
+name: Toolbox release
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      create_draft:
+        description: Create an unpublished release draft (requires a version tag and settled license)
+        type: boolean
+        default: false
+      release_tag:
+        description: Existing tag matching the manifest version, e.g. v0.1.0
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: toolbox-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.create_draft && format('refs/tags/{0}', inputs.release_tag) || github.ref }}
+          path: package/EquaForgeAerospace
+          persist-credentials: false
+      - name: Prepare preview or tagged release
+        env:
+          REPOSITORY: ${{ github.repository }}
+          CREATE_DRAFT: ${{ inputs.create_draft }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          GH_TOKEN: ${{ inputs.create_draft && github.token || '' }}
+        shell: bash
+        run: |
+          args=()
+          if [ "$CREATE_DRAFT" = "true" ]; then
+            if [ -z "$RELEASE_TAG" ]; then echo 'A version tag is required'; exit 1; fi
+            args+=(--release-tag "$RELEASE_TAG" --fetch-previous)
+          fi
+          python3 package/EquaForgeAerospace/.equaforge/ci_toolbox_release.py package/EquaForgeAerospace \
+            --output-dir "$RUNNER_TEMP/dist" --repository "$REPOSITORY" "${args[@]}"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: toolbox-release
+          path: |
+            ${{ runner.temp }}/dist/*.zip
+            ${{ runner.temp }}/dist/toolboxes.json
+            ${{ runner.temp }}/dist/release.json
+          if-no-files-found: error
+          retention-days: 14
+
+  draft:
+    if: github.event_name == 'workflow_dispatch' && inputs.create_draft
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: refs/tags/${{ inputs.release_tag }}
+          path: package/EquaForgeAerospace
+          persist-credentials: false
+      - uses: actions/download-artifact@v8
+        with:
+          name: toolbox-release
+          path: ${{ runner.temp }}/dist
+      - name: Create draft without replacing an existing release
+        env:
+          REPOSITORY: ${{ github.repository }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 package/EquaForgeAerospace/.equaforge/ci_toolbox_release.py package/EquaForgeAerospace \
+            --output-dir "$RUNNER_TEMP/dist" --repository "$REPOSITORY" \
+            --release-tag "$RELEASE_TAG" --create-draft
