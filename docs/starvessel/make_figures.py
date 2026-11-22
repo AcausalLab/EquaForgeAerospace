@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Draws the mission profile of the Starship-class tutorial from a run of FullMission.
+"""Draws the mission profile of the StarVessel tutorial from a run of FullMission.
 
-    python docs/starship/make_figures.py
+    python docs/starvessel/make_figures.py
 
 needs the equaforge Python package (PYTHONPATH and EQUAFORGE_DLL_DIR of a build, as for the
 worksheets) and the drawing kit of EquaForge's tools/make_library_figures.py (found through
@@ -25,13 +25,13 @@ if not (APP / "tools" / "make_library_figures.py").is_file():
 sys.path.insert(0, str(APP / "tools"))
 from make_library_figures import Figure, mi  # noqa: E402  (the help figures' drawing kit)
 
-Figure.generator = "docs/starship/make_figures.py"
+Figure.generator = "docs/starvessel/make_figures.py"
 
 
 def run():
     import equaforge as ef
-    source = TOOLBOX / "examples" / "starship_mission" / "StarshipMission.mo"
-    r = ef.simulate(source, model="StarshipMission.FullMission", libraries=[TOOLBOX],
+    source = TOOLBOX / "examples" / "starvessel_mission" / "StarVesselMission.mo"
+    r = ef.simulate(source, model="StarVesselMission.FullMission", libraries=[TOOLBOX],
                     outputs=["*.airData.h", "*.computer.flight.phase"])
     t = np.asarray(r["time"])
     return t, {k: np.asarray(r[k]) for k in ("ship.airData.h", "booster.airData.h",

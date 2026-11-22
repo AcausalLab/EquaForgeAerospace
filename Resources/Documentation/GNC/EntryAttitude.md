@@ -3,7 +3,7 @@ class: EquaForgeAerospace.GNC.EntryAttitude
 keywords: [entry, angle of attack, bank angle, belly flop, attitude command]
 see_also: [EquaForgeAerospace.GNC.AttitudeError, EquaForgeAerospace.Aerodynamics.BodyAero, EquaForgeAerospace.Thermal.StagnationHeating]
 figures: [../figures/entry.svg]
-validation: [examples.model.StarshipMission.ShipEntryLanding]
+validation: [examples.model.StarVesselMission.ShipEntryLanding]
 page_type: block
 ---
 ## Description
@@ -23,7 +23,7 @@ $\mathbf{b}$ is square to the nose, facing the flow. The bank turns both about $
 
 The airspeed is the velocity relative to the turning Earth; the wind is left out. The local
 vertical must not be along the airspeed: the block is meant for flight across the air, not
-straight down. Near a vertical fall, fade the bank out, as the `StarshipMission` ship does
+straight down. Near a vertical fall, fade the bank out, as the `StarVesselMission` ship does
 between Mach 2 and Mach 1.
 
 ## Equations
@@ -49,8 +49,8 @@ crossrange with `bank`.
 
 ## Validation
 
-The `StarshipMission` ship flies its entry and belly-flop with this block
-(`examples.model.StarshipMission.ShipEntryLanding`). Its worksheet checks the heating that results
+The `StarVesselMission` ship flies its entry and belly-flop with this block
+(`examples.model.StarVesselMission.ShipEntryLanding`). Its worksheet checks the heating that results
 against Sutton–Graves.
 
 ## References

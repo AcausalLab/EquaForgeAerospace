@@ -6,8 +6,8 @@ whole mission, look inside the vehicles, fly single segments of the flight and c
 results against theory in a worksheet. It takes about half an hour. Work through the
 *Getting started* chapter of the EquaForge manual first.
 
-> **Note:** The vehicle data are illustrative: they are rounded from public estimates of a
-> Starship-class vehicle, not taken from the manufacturer.
+> **Note:** The vehicle data are illustrative: they are rounded from public estimates for a
+> fully reusable two-stage launcher, not taken from any manufacturer.
 
 ## The mission
 
@@ -19,7 +19,7 @@ and brakes into the arms of its tower. The ship flies on to a 185 × 225 km orbi
 and then burns to leave orbit. It enters the atmosphere belly-first, falls belly-first through
 the lower air, flips upright and lands on its legs beside the tower.
 
-![Altitude of the ship and of the booster against time, with eleven numbered events](starship/mission-profile.svg)
+![Altitude of the ship and of the booster against time, with eleven numbered events](starvessel/mission-profile.svg)
 
 *The altitude $h$ (km) of the ship (solid) and the booster (dashed) against the time $t$
 (minutes) in the simulated mission. The axis is broken between 9 and 60 minutes, during the
@@ -52,22 +52,22 @@ flowchart LR
   ship --> sflaps["flaps, legs, payload"]
 ```
 
-![The FullMission diagram: the Earth, three launch sites, the launch mount, the booster and the ship](starship/full-mission-diagram.png)
+![The FullMission diagram: the Earth, three launch sites, the launch mount, the booster and the ship](starvessel/full-mission-diagram.png)
 
-*The top of the study, `StarshipMission.FullMission`. The turning Earth carries the launch pad,
+*The top of the study, `StarVesselMission.FullMission`. The turning Earth carries the launch pad,
 the tower's catch point and the ship's landing pad. The mount holds the stack until lift-off.*
 
 ## Run the whole mission
 
 1. In Studio, open **Settings > Libraries**, choose **Add Folder** and select the toolbox's
    folder (the one with `package.mo` and `library.json`). Then open the examples, choose
-   **Studies** and the Starship mission (`examples/starship_mission`).
-2. Select the model `StarshipMission.FullMission` and choose **Simulate**. The run takes about
+   **Studies** and the StarVessel mission (`examples/starvessel_mission`).
+2. Select the model `StarVesselMission.FullMission` and choose **Simulate**. The run takes about
    15 seconds on a desktop computer.
 3. The **Results** panel opens with six plots in a grid: altitude, speed, orbit, ground track,
    mass and the heat shield's temperature. The plots share their time axis.
 
-![The Results panel with the altitude and speed plots of both vehicles](starship/full-mission-plots.png)
+![The Results panel with the altitude and speed plots of both vehicles](starvessel/full-mission-plots.png)
 
 *The first two plots of the mission: the altitudes and the speeds of the ship and the booster.
 The cursor shows the values at one time.*
@@ -85,12 +85,12 @@ The cursor shows the values at one time.*
    Play the flight, or drag the time slider to an event of the
    [mission profile](#the-mission).
 
-![The stack standing on its launch deck beside the tower, its arms open, the ship's landing pad to the west](starship/3d-liftoff.png)
+![The stack standing on its launch deck beside the tower, its arms open, the ship's landing pad to the west](starvessel/3d-liftoff.png)
 
 *Lift-off, drawn in the axes of the ground: the stack stands vertical on its deck beside the tower.
 The ship's landing pad lies 230 m to the west.*
 
-![The booster hanging from its pins in the tower's closed arms](starship/3d-catch.png)
+![The booster hanging from its pins in the tower's closed arms](starvessel/3d-catch.png)
 
 *The catch, in `TowerCatch`: the booster hangs from its two pins in the closed arms. Its grid fins
 sit just above the arms.*
@@ -110,12 +110,12 @@ What to look for:
   throws it some 200 m along and across its heading. The belly-flop aims short along the heading
   only, and the landing burn removes just part of the rest.
 
-![The ship falling horizontally, its heat shield facing down and its four flaps standing out](starship/3d-belly-flop.png)
+![The ship falling horizontally, its heat shield facing down and its four flaps standing out](starvessel/3d-belly-flop.png)
 
 *The belly-flop, seen from the side 6 km up: the heat shield faces the ground in the colour of its
 temperature. The flaps stand out into the airflow at the angles their actuators hold.*
 
-![Top view of the site at the end: the ship's track with a loop, the ship on its legs north of its pad, the booster in the tower](starship/3d-landing-top.png)
+![Top view of the site at the end: the ship's track with a loop, the ship on its legs north of its pad, the booster in the tower](starvessel/3d-landing-top.png)
 
 *The end of the mission from above, north up. The ship's track loops where the flip throws it, and
 the ship stands on its legs about 120 m north-east of its pad. The booster hangs in the tower.*
@@ -130,16 +130,16 @@ Open the diagram of `booster` or `ship`, and further into `computer`, `feed`, `c
 `heatShield`. Every diagram has a note that says what it does. Select a block and press **F1**
 for its help page: the library's pages give each block's equations, assumptions and a figure.
 
-![The feed system diagram: two propellant tanks with pressure controllers, wall heat and the stage's mass](starship/feed-system-diagram.png)
+![The feed system diagram: two propellant tanks with pressure controllers, wall heat and the stage's mass](starvessel/feed-system-diagram.png)
 
-*A stage's feed system (`StarshipMission.FeedSystem`). Two `PropellantTank` blocks hold liquid
+*A stage's feed system (`StarVesselMission.FeedSystem`). Two `PropellantTank` blocks hold liquid
 oxygen and methane. A `PI` controller per tank holds the ullage pressure with gas tapped from
 the engines. Heat through the insulation boils propellant off. `MassSum3` adds the dry stage and
 both liquids into the mass properties that the free body flies with.*
 
-![The heat shield diagram: stagnation heating into the tiles, radiation to the sky and conduction into the structure](starship/heat-shield-diagram.png)
+![The heat shield diagram: stagnation heating into the tiles, radiation to the sky and conduction into the structure](starvessel/heat-shield-diagram.png)
 
-*The heat shield (`StarshipMission.HeatShield`). `StagnationHeating` computes the Sutton–Graves
+*The heat shield (`StarVesselMission.HeatShield`). `StagnationHeating` computes the Sutton–Graves
 flux from the air density and speed. The flux heats the tiles, which radiate to the sky and pass a
 little heat into the steel. The tiles' temperature colours them in the 3-D view.*
 
@@ -170,7 +170,7 @@ the landing in a fraction of the time.
 
 ## Check the results in the worksheet
 
-Open `StarshipMission_Analysis.ipynb` from the study's folder and choose **Run All**. It takes
+Open `StarVesselMission_Analysis.ipynb` from the study's folder and choose **Run All**. It takes
 about a minute and a half. Each section computes a result from the simulation and compares it
 with theory, and stops with an error if the two disagree:
 
@@ -191,7 +191,7 @@ with theory, and stops with an error if the two disagree:
 The sweeps translate a model once and run it many times with other parameter values:
 
 ```python
-booster = ef.translate(source, model="StarshipMission.BoosterReturn", libraries=libraries)
+booster = ef.translate(source, model="StarVesselMission.BoosterReturn", libraries=libraries)
 for bias in (-600, -350, 0):
     r = booster.simulate(stop=480, set={"booster.computer.rangeBias": bias},
                          outputs=["booster.computer.*", "booster.airData.h"])
@@ -200,7 +200,7 @@ for bias in (-600, -350, 0):
 The same worksheet runs from the command line:
 
 ```sh
-equaforge run StarshipMission_Analysis.ipynb -o result.ipynb
+equaforge run StarVesselMission_Analysis.ipynb -o result.ipynb
 ```
 
 ## Change the mission

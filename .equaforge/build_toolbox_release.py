@@ -101,7 +101,9 @@ def build_release(folder, output_dir, *, repository="", download_url="", catalog
     version(metadata["minAppVersion"])
     if not metadata.get("license") or len(metadata["license"]) > 256:
         raise ValueError("The manifest needs a license identifier")
-    if not metadata.get("name") or len(metadata["name"]) > 256 or len(description) > 4096:
+    # The catalog shows the manifest's description unless the command line gives one.
+    description = description or metadata.get("description", "")
+    if not metadata.get("name") or len(metadata["name"]) > 256 or not isinstance(description, str) or len(description) > 4096:
         raise ValueError("Invalid package name or description")
     if not development and metadata["license"] == "NOASSERTION":
         raise ValueError("Settle the package license before building a public catalog")

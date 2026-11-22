@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""Writes the Starship mission study's worksheet,
-examples/starship_mission/StarshipMission_Analysis.ipynb (nbformat 4.5, no outputs), from the
-cells below. `equaforge run` executes it (ctest examples.study.StarshipMission_Analysis, with
+"""Writes the StarVessel mission study's worksheet,
+examples/starvessel_mission/StarVesselMission_Analysis.ipynb (nbformat 4.5, no outputs), from the
+cells below. `equaforge run` executes it (ctest examples.study.StarVesselMission_Analysis, with
 EF_AEROSPACE_TOOLBOX_DIR set); its checks make a finished run a passing test.
 
-    python3 tools/make_starship_worksheet.py [OUT.ipynb]
+    python3 tools/make_starvessel_worksheet.py [OUT.ipynb]
 """
 import json
 import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "..", "examples", "starship_mission", "StarshipMission_Analysis.ipynb")
+OUT = os.path.join(HERE, "..", "examples", "starvessel_mission", "StarVesselMission_Analysis.ipynb")
 
 cells = []
 
@@ -28,9 +28,9 @@ def code(text):
 
 
 md(r"""
-# A Starship-class round trip: from the pad to orbit and back
+# A StarVessel round trip: from the pad to orbit and back
 
-Two reusable stages fly from a launch site at 26° N: the booster lifts the stack, cuts off with its return propellant, flips, burns back, falls tail-first and brakes into the arms of the tower it left; the ship flies on to a 185 × 225 km orbit, releases a 100 t payload, coasts most of an orbit, burns at the moment its ground track will bring it back over the launch site, enters belly-first, falls belly-first through the lower atmosphere and lands on its legs beside the tower. Everything is in **StarshipMission.mo** beside this worksheet: 6-DOF vehicles with their propellant feed, engines, actuators, aerodynamics, heat shield and flight computers, on the turning Earth.
+Two reusable stages fly from a launch site at 26° N: the booster lifts the stack, cuts off with its return propellant, flips, burns back, falls tail-first and brakes into the arms of the tower it left; the ship flies on to a 185 × 225 km orbit, releases a 100 t payload, coasts most of an orbit, burns at the moment its ground track will bring it back over the launch site, enters belly-first, falls belly-first through the lower atmosphere and lands on its legs beside the tower. Everything is in **StarVesselMission.mo** beside this worksheet: 6-DOF vehicles with their propellant feed, engines, actuators, aerodynamics, heat shield and flight computers, on the turning Earth.
 
 This worksheet looks at the mission the way its designers would:
 
@@ -44,7 +44,7 @@ This worksheet looks at the mission the way its designers would:
 8. Monte Carlo: the booster's catch under engine and load dispersions,
 9. the whole mission in one run, its timeline and the 3-D animation.
 
-The vehicle data are illustrative, rounded from public estimates of a Starship-class vehicle; they are not the manufacturer's data. The **settings** cell holds the worksheet's choices: change it and run all again.
+The vehicle data are illustrative, rounded from public estimates for a fully reusable two-stage launcher; they are not any manufacturer's data. The **settings** cell holds the worksheet's choices: change it and run all again.
 """)
 
 code(r"""
@@ -68,18 +68,18 @@ from IPython.display import Markdown, display
 import equaforge as ef
 
 here = Path.cwd()  # the kernel runs in the worksheet's folder
-source = here / "StarshipMission.mo"
-assert source.is_file(), "run this worksheet from its folder (StarshipMission.mo beside it)"
-# the blocks come from the EquaForgeAerospace toolbox: this study is its examples/starship_mission
+source = here / "StarVesselMission.mo"
+assert source.is_file(), "run this worksheet from its folder (StarVesselMission.mo beside it)"
+# the blocks come from the EquaForgeAerospace toolbox: this study is its examples/starvessel_mission
 toolbox = here.parents[1]
 assert (toolbox / "library.json").is_file(), "keep this study in the toolbox's examples folder"
 libraries = [toolbox]
-out = Path(tempfile.mkdtemp(prefix="equaforge-starship-"))
+out = Path(tempfile.mkdtemp(prefix="equaforge-starvessel-"))
 MU, RE, J2, WE, G0 = 3.986004418e14, 6378137.0, 1.08262668e-3, 7.2921159e-5, 9.80665
 DEG = 180 / np.pi
 
 def sim(model, **kw):
-    return ef.simulate(source, model="StarshipMission." + model, libraries=libraries, **kw)
+    return ef.simulate(source, model="StarVesselMission." + model, libraries=libraries, **kw)
 
 def first(mask):
     return int(np.argmax(mask)) if np.any(mask) else len(mask) - 1
@@ -291,7 +291,7 @@ The boostback burn ends when the impact point predicted for a fall in vacuum (`I
 """)
 
 code(r"""
-booster = ef.translate(source, model="StarshipMission.BoosterReturn", libraries=libraries)
+booster = ef.translate(source, model="StarVesselMission.BoosterReturn", libraries=libraries)
 outs = ["booster.computer.flight.phase", "booster.computer.landing.offset", "booster.computer.landing.sinkRate",
         "booster.feed.propellant", "booster.computer.h", "booster.computer.landing.v_ref", "booster.airData.h",
         "booster.ipp.rangeToGo", "booster.ipp.crossRange"]
@@ -379,7 +379,7 @@ start = {"h0": d @ up, "x0": -np.linalg.norm(dh), "vh0": dv_ @ up, "vx0": -(dv_ 
 print("flip starts at", {k: round(float(v), 1) for k, v in start.items()})
 # the point-mass burn from the ship's state: a model that extends Descent3DOF with it
 descent = out / "Descent.mo"
-descent.write_text("model Descent extends StarshipMission.Descent3DOF(" +
+descent.write_text("model Descent extends StarVesselMission.Descent3DOF(" +
                    ", ".join(f"{k} = {v:.6g}" for k, v in start.items()) + "); end Descent;")
 best_oc = None
 for T in DESCENT_TIMES:
@@ -403,7 +403,7 @@ On one engine the ship is a pitch inertia that its gimbal turns: `AutopilotPlant
 """)
 
 code(r"""
-lin = ef.linearize(source, model="StarshipMission.AutopilotPlant", libraries=libraries)
+lin = ef.linearize(source, model="StarVesselMission.AutopilotPlant", libraries=libraries)
 display(Markdown(f"States {lin.states}, input {lin.inputs}, outputs {lin.outputs}."))
 A, B, C = lin.A, lin.B, lin.C[lin.outputs.index("tilt")]
 w = np.logspace(-2, 2, 2000)

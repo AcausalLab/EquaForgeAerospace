@@ -3,7 +3,7 @@ class: EquaForgeAerospace.GNC.PoweredDescent
 keywords: [powered descent, landing burn, hover-slam, suicide burn, guidance, throttle, lateral guidance]
 see_also: [EquaForgeAerospace.GNC.AttitudeError, EquaForgeAerospace.Propulsion.EngineCluster, EquaForgeVC.Multibody.ForcesAndMoments.Contact, EquaForgeAerospace.Examples.Hopper]
 figures: [../figures/hoverslam.svg]
-validation: [unit.aerospace, examples.study.StarshipMission_Analysis]
+validation: [unit.aerospace, examples.study.StarVesselMission_Analysis]
 page_type: block
 ---
 ## Description
@@ -83,7 +83,7 @@ wherever it is, and cut the engines on touchdown from the legs' contact force.
 ## Validation
 
 `unit.aerospace` lands the `Hopper` upright and at rest within 10 m of its pad. The
-`StarshipMission_Analysis` worksheet recomputes the booster's stopping height from its speed at
+`StarVesselMission_Analysis` worksheet recomputes the booster's stopping height from its speed at
 ignition. The hover-slam would ask for more than 6 km, so the flight computer's height cap lights
 the burn there and the denser air below makes up the rest. The worksheet also compares the ship's
 six-degree-of-freedom landing with the fuel-optimal burn that `ef.optimal_control` finds for the

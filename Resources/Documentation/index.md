@@ -3,7 +3,7 @@ class: EquaForgeAerospace
 keywords: [aerospace, launch vehicle, rocket, orbit, guidance, entry, landing]
 see_also: [EquaForgeVC.Multibody.BodiesAndFrames.FreeBody, EquaForgeVC.Multibody.BodiesAndFrames.CapturableBody, EquaForgeAerospace.Examples.Hopper]
 figures: []
-validation: [unit.aerospace, examples.study.StarshipMission_Analysis]
+validation: [unit.aerospace, examples.study.StarVesselMission_Analysis]
 page_type: package
 ---
 ## Description
@@ -62,7 +62,7 @@ Start from the examples in `EquaForgeAerospace.Examples`:
 - `EntryHeating`: a capsule entering the atmosphere, with its heat shield's temperature.
 - `Hopper`: a test vehicle that lifts off from its pad and lands again with a guided burn.
 
-The `StarshipMission` example in `examples/starship_mission` uses these blocks for a
+The `StarVesselMission` example in `examples/starvessel_mission` uses these blocks for a
 two-stage, fully reusable launch to orbit and back.
 
 ## Validation
@@ -71,7 +71,7 @@ two-stage, fully reusable launch to orbit and back.
 the 1976 standard, the orbital elements against Vallado's worked example, and the orbits against
 Kepler's period and the J2 node regression. The suite also checks heating against Sutton–Graves,
 the nozzle's pressure loss, the attitude error and the tank's mass balance. The
-`StarshipMission_Analysis` worksheet compares a whole mission with theory.
+`StarVesselMission_Analysis` worksheet compares a whole mission with theory.
 
 ## References
 

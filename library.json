@@ -2,9 +2,10 @@
   "schemaVersion": 1,
   "id": "EquaForgeAerospace",
   "name": "Aerospace",
+  "description": "Launch vehicles and spacecraft: the turning Earth with J2 gravity, the 1976 standard atmosphere, aerodynamics, propellant feed and engines, actuators, guidance and entry heating. Includes the StarVessel study, a two-stage round trip to orbit with a tower catch.",
   "version": "0.1.0",
   "minAppVersion": "0.0.3",
-  "license": "NOASSERTION",
+  "license": "BSD-3-Clause",
   "dependencies": [
     "EquaForgeVC"
   ],
@@ -14,6 +15,7 @@
   "distributionFiles": [
     "package.mo",
     "library.json",
+    "LICENSE",
     "README.md",
     "Resources",
     "examples",

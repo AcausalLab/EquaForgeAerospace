@@ -56,7 +56,7 @@ is about 9.8 m/s².
 
 `unit.aerospace` flies a circular 400 km orbit at 51.6° for five periods. With `J2 = 0` the
 orbit keeps its period, energy and radius to 1e-8. With J2 the node turns at the rate above,
-within 2 %. The `StarshipMission_Analysis` worksheet re-propagates the parking orbit with SciPy
+within 2 %. The `StarVesselMission_Analysis` worksheet re-propagates the parking orbit with SciPy
 under the same field.
 
 ## References

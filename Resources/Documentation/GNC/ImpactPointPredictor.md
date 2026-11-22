@@ -3,7 +3,7 @@ class: EquaForgeAerospace.GNC.ImpactPointPredictor
 keywords: [impact point, boostback, range to go, crossrange, Kepler, ballistic, return to launch site]
 see_also: [EquaForgeAerospace.GNC.OrbitalElements, EquaForgeAerospace.GNC.GroundTrack, EquaForgeAerospace.GNC.PoweredDescent]
 figures: [../figures/impact.svg]
-validation: [examples.model.StarshipMission.BoosterReturn, examples.study.StarshipMission_Analysis]
+validation: [examples.model.StarVesselMission.BoosterReturn, examples.study.StarVesselMission_Analysis]
 page_type: block
 ---
 ## Description
@@ -25,7 +25,7 @@ $s$ runs from the impact point to the target (the flag).
 There is no drag and the Earth is a sphere of radius $R_e$. The arc must come down. For an orbit
 that never meets the surface the outputs have no meaning. At or below the surface, the impact
 point is where the vehicle is. Drag shortens a real fall; aim a little
-long, as the `StarshipMission` booster does with its range bias.
+long, as the `StarVesselMission` booster does with its range bias.
 
 ## Equations
 
@@ -62,8 +62,8 @@ burn's direction. Once the burn ends, the predictor shows how far the fall will 
 
 ## Validation
 
-The `StarshipMission` booster ends its boostback on this block's range to go
-(`examples.model.StarshipMission.BoosterReturn`). The worksheet tunes the range bias by shooting:
+The `StarVesselMission` booster ends its boostback on this block's range to go
+(`examples.model.StarVesselMission.BoosterReturn`). The worksheet tunes the range bias by shooting:
 over a range of biases it compares where the booster comes down with the tower, and the catch
 misses by under 20 m.
 

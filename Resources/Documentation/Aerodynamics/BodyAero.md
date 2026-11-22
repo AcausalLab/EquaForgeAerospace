@@ -3,7 +3,7 @@ class: EquaForgeAerospace.Aerodynamics.BodyAero
 keywords: [aerodynamics, normal force, axial force, centre of pressure, cross flow, belly flop, angle of attack]
 see_also: [EquaForgeAerospace.Environment.AirData, EquaForgeAerospace.Aerodynamics.Flap, EquaForgeAerospace.Aerodynamics.GridFinSet]
 figures: [../figures/bodyaero.svg]
-validation: [examples.model.StarshipMission.ShipEntryLanding]
+validation: [examples.model.StarVesselMission.ShipEntryLanding]
 page_type: block
 ---
 ## Description
@@ -62,8 +62,8 @@ flaps to trim it.
 
 ## Validation
 
-The `StarshipMission` ship falls belly-first and trims with its flaps
-(`examples.model.StarshipMission.ShipEntryLanding`). Its booster falls tail-first under grid fins
+The `StarVesselMission` ship falls belly-first and trims with its flaps
+(`examples.model.StarVesselMission.ShipEntryLanding`). Its booster falls tail-first under grid fins
 (`BoosterReturn`). No unit test compares the coefficients with wind-tunnel data: they are
 illustrative and belong to the user's vehicle.
 

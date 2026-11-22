@@ -1,4 +1,4 @@
-package StarshipMission "A Starship-class launch to orbit and back: ascent, hot staging, booster return and tower catch, orbit, entry and landing"
+package StarVesselMission "A StarVessel launch to orbit and back: ascent, hot staging, booster return and tower catch, orbit, entry and landing"
   model FeedSystem "Propellant feed of a stage: oxygen and methane tanks, autogenous pressurisation, heat leak and the stage's mass properties"
     parameter Real m_dry(unit = "kg") = 2.75e5 "Dry mass of the stage";
     parameter Real r_CM_dry[3](each unit = "m") = {30, 0, 0} "Centre of mass of the dry stage, stage frame";
@@ -463,7 +463,7 @@ package StarshipMission "A Starship-class launch to orbit and back: ascent, hot 
       Documentation(info = "<html><p>What the 3-D view draws of the booster, about its frame at the engine gimbals (x towards the top): a 9 m hull 69 m long, the dark hot-staging ring above it, four grid fins at 66 m that turn with their actuators, the two catch pins at 62 m and a plume below the engines that shows while they burn, brighter with more thrust.</p></html>"));
   end BoosterLook;
 
-  model Booster "Super Heavy-class booster: structure, feed system, 33 engines in two rings, grid fins, actuators, attitude control and flight computer"
+  model Booster "StarVessel booster: structure, feed system, 33 engines in two rings, grid fins, actuators, attitude control and flight computer"
     parameter Integer phase_start = 0 "Phase of the flight computer at the start";
     parameter Real r_start[3](each unit = "m") = zeros(3) "Position of the booster frame at the start, world";
     parameter Real v_start[3](each unit = "m/s") = zeros(3) "Velocity at the start, world";
@@ -640,7 +640,7 @@ package StarshipMission "A Starship-class launch to orbit and back: ascent, hot 
         Rectangle(extent = {{40, 170}, {60, 140}}, lineColor = {60, 60, 60}, fillColor = {90, 90, 90}, fillPattern = FillPattern.CrossDiag),
         Text(extent = {{-200, 240}, {200, 205}}, textString = "%name")}),
       Diagram(coordinateSystem(extent = {{-200, -200}, {200, 280}}), graphics = {Text(extent = {{-195, 278}, {195, 220}}, textString = "## Booster\nA free body (CapturableBody: held on the mount, then free) with its feed system and mass properties, three engine rings (EngineCluster: the core three and the inner ten gimballed, the outer twenty fixed), grid fins at the top, the body's aerodynamics, gravity, atmosphere and wind (FileTable), actuators on a battery bus, attitude control and the flight computer. While it carries the ship, the hot-staging ring (Attachment) holds it and the combined mass moves the centre of mass up.", fontSize = 8, horizontalAlignment = TextAlignment.Left, textColor = {0, 0, 0}, __EquaForgeKind = "note", __EquaForgeTheme = true)}),
-      Documentation(info = "<html><p>The first stage. Illustrative values, rounded from public estimates of a Super Heavy-class booster; not the manufacturer's data.</p></html>"));
+      Documentation(info = "<html><p>The first stage. Illustrative values, rounded from public estimates for a fully reusable heavy-lift booster; not any manufacturer's data.</p></html>"));
   end Booster;
   model ShipFlightComputer "The ship's flight: carried, hot staging, ascent to orbit, coast, deorbit, belly-first entry, belly-flop, flip and landing"
     parameter Integer phase_start = 0 "Phase at the start: 0 carried (a segment that starts later sets 3 or 5)";
@@ -974,7 +974,7 @@ package StarshipMission "A Starship-class launch to orbit and back: ascent, hot 
       Documentation(info = "<html><p>What the 3-D view draws of the ship, about its frame at the engine gimbals (x towards the nose, y towards the belly): a 9 m hull 41 m long under a 9 m nose cone, the heat shield on the belly in the colour of its temperature, four flaps hinged along the sides that turn with their actuators (folded towards the back, standing out when open), four legs once they are deployed for the landing (<b>legsOut</b>) and a plume below the engines that shows while they burn. Belly-first, the dark shield faces the ground and the flaps stand out into the flow.</p></html>"));
   end ShipLook;
 
-  model Ship "Starship-class upper stage: feed system, sea-level and vacuum engines, flaps, heat shield, legs, attitude control and flight computer"
+  model Ship "StarVessel upper stage: feed system, sea-level and vacuum engines, flaps, heat shield, legs, attitude control and flight computer"
     parameter Integer phase_start = 0 "Phase of the flight computer at the start";
     parameter Real r_start[3](each unit = "m") = zeros(3) "Position of the ship frame at the start, world";
     parameter Real v_start[3](each unit = "m/s") = zeros(3) "Velocity at the start, world";
@@ -1151,7 +1151,7 @@ package StarshipMission "A Starship-class launch to orbit and back: ascent, hot 
         Polygon(points = {{-40, -110}, {-80, -130}, {-80, -160}, {-40, -150}}, lineColor = {60, 60, 60}, fillColor = {90, 90, 90}, fillPattern = FillPattern.Solid),
         Text(extent = {{-200, 240}, {200, 205}}, textString = "%name")}),
       Diagram(coordinateSystem(extent = {{-200, -200}, {200, 280}}), graphics = {Text(extent = {{-195, 278}, {195, 220}}, textString = "## Ship\nA free body that rides on the booster until hot staging (CapturableBody), with its feed system, three gimballed sea-level engines (one that lands it and a pair) and three fixed vacuum engines, four flaps on electromechanical actuators, the heat shield, landing legs, attitude control (gimbal, flaps, thrusters) and the flight computer. Orbit and ground track come from OrbitalElements and GroundTrack.", fontSize = 8, horizontalAlignment = TextAlignment.Left, textColor = {0, 0, 0}, __EquaForgeKind = "note", __EquaForgeTheme = true)}),
-      Documentation(info = "<html><p>The second stage. Illustrative values, rounded from public estimates of a Starship-class upper stage; not the manufacturer's data. The body axes: x towards the nose, y towards the belly (the heat shield).</p></html>"));
+      Documentation(info = "<html><p>The second stage. Illustrative values, rounded from public estimates for a fully reusable upper stage; not any manufacturer's data. The body axes: x towards the nose, y towards the belly (the heat shield).</p></html>"));
   end Ship;
   model LaunchComplex "The launch site in the 3-D view: land and sea, the launch deck, the tower with its arms (they close on the caught booster) and the ship's landing pad"
     parameter Real latitude(unit = "rad", displayUnit = "deg") = 0.45373 "Latitude of the launch pad (the tower and the landing pad are placed from it)";
@@ -1591,5 +1591,5 @@ The booster's last 75 s with the tower's mechanism: a carriage on a slide (Prism
         Plot(name = "Speeds", curves = {"vh", "vx"}),
         Plot(name = "Mass", curves = {"m"})}, plotArrangement = "Grid", linkTime = true));
   end Descent3DOF;
-  annotation(Documentation(info = "<html><p>A Starship-class round trip on the turning Earth, from the pad to orbit and back: the booster returns to the tower that launched it and is caught in its arms, the ship lands on its legs beside it after most of an orbit. Both stages are 6-DOF free bodies with their propellant feed, engines, actuators, aerodynamics, heat shield and flight computers, built from <code>EquaForgeVC.Multibody</code> and <code>EquaForgeAerospace</code>.</p><p>The vehicle data are illustrative, rounded from public estimates of a Starship-class vehicle; they are not the manufacturer's data.</p><p>Start with <code>FullMission</code> (the whole flight, its 3-D view) and the worksheet <code>StarshipMission_Analysis.ipynb</code> beside this file. The other models are its segments: <code>AscentToOrbit</code>, <code>BoosterReturn</code>, <code>TowerCatch</code>, <code>OrbitPlanning</code>, <code>ShipEntryLanding</code>, and the reduced models <code>AutopilotPlant</code> (linearisation) and <code>Descent3DOF</code> (optimal control).</p></html>"));
-end StarshipMission;
+  annotation(Documentation(info = "<html><p>A StarVessel round trip on the turning Earth, from the pad to orbit and back: the booster returns to the tower that launched it and is caught in its arms, the ship lands on its legs beside it after most of an orbit. Both stages are 6-DOF free bodies with their propellant feed, engines, actuators, aerodynamics, heat shield and flight computers, built from <code>EquaForgeVC.Multibody</code> and <code>EquaForgeAerospace</code>.</p><p>The vehicle data are illustrative, rounded from public estimates for a fully reusable two-stage launcher; they are not any manufacturer's data.</p><p>Start with <code>FullMission</code> (the whole flight, its 3-D view) and the worksheet <code>StarVesselMission_Analysis.ipynb</code> beside this file. The other models are its segments: <code>AscentToOrbit</code>, <code>BoosterReturn</code>, <code>TowerCatch</code>, <code>OrbitPlanning</code>, <code>ShipEntryLanding</code>, and the reduced models <code>AutopilotPlant</code> (linearisation) and <code>Descent3DOF</code> (optimal control).</p></html>"));
+end StarVesselMission;

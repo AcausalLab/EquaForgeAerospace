@@ -3,7 +3,7 @@ class: EquaForgeAerospace.Propulsion.RocketEngine
 keywords: [rocket engine, turbopump, chamber pressure, throttle, specific impulse, mixture ratio]
 see_also: [EquaForgeAerospace.Propulsion.Nozzle, EquaForgeAerospace.Propulsion.TurbopumpLoad, EquaForgeAerospace.Propulsion.EngineCluster, EquaForgeAerospace.Propulsion.PropellantTank, EquaForgeAerospace.Examples.StaticFire]
 figures: []
-validation: [examples.model.StarshipMission.AscentToOrbit]
+validation: [examples.model.StarVesselMission.AscentToOrbit]
 page_type: block
 ---
 ## Description
@@ -69,7 +69,7 @@ engine on a test stand with its tanks and pressurisation.
 
 ## Validation
 
-`StaticFire` and the `StarshipMission` ascent (`examples.model.StarshipMission.AscentToOrbit`)
+`StaticFire` and the `StarVesselMission` ascent (`examples.model.StarVesselMission.AscentToOrbit`)
 run engines through start, throttle changes and cutoff. The worksheet checks the propellant
 that the booster's tanks lose up to cutoff against the integrated flow of its engine rings. The
 nozzle's pressure loss is checked in `unit.aerospace`.

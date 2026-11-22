@@ -46,7 +46,7 @@ $$\boldsymbol{\Delta}=-\frac{r}{N-1}\left(0,\;\cos\varphi,\;\sin\varphi\right)\q
 
 Put `frame_b` at the gimbal point with a `RigidBodyFrame` from the vehicle's frame. Drive the
 gimbal from two actuators; for a ring that does not gimbal, feed zeros. Several rings make a
-stage. The `StarshipMission` booster has a centre ring of three and an inner ring of ten that
+stage. The `StarVesselMission` booster has a centre ring of three and an inner ring of ten that
 gimbal, and a fixed outer ring of twenty. Its ship lands on a "ring" of one sea-level engine on
 the axis.
 

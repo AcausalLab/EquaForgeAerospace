@@ -3,7 +3,7 @@ class: EquaForgeAerospace.Thermal.StagnationHeating
 keywords: [heating, Sutton-Graves, stagnation point, entry, heat shield, heat flux]
 see_also: [EquaForgeVC.Thermal.HeatCapacitor, EquaForgeVC.Thermal.BodyRadiation, EquaForgeAerospace.GNC.EntryAttitude, EquaForgeAerospace.Examples.EntryHeating]
 figures: [../figures/stagnation.svg]
-validation: [unit.aerospace, examples.study.StarshipMission_Analysis]
+validation: [unit.aerospace, examples.study.StarVesselMission_Analysis]
 page_type: block
 ---
 ## Description
@@ -46,7 +46,7 @@ that enters belly-first, the effective nose radius is about the body's radius.
 ## Validation
 
 `unit.aerospace` checks the flux at $\rho = 10^{-4}$ kg/m³ and $V$ = 7 km/s against the formula.
-The `StarshipMission_Analysis` worksheet recomputes the heating of the ship's entry from its
+The `StarVesselMission_Analysis` worksheet recomputes the heating of the ship's entry from its
 altitude and speed and compares it with the block. It then checks that the shield's peak
 temperature stays inside the tiles' range.
 

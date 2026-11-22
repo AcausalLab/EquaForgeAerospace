@@ -3,7 +3,7 @@ class: EquaForgeAerospace.Propulsion.PropellantTank
 keywords: [propellant tank, ullage, pressurisation, boil-off, relief valve, cryogenic, mass properties]
 see_also: [EquaForgeAerospace.Propulsion.RocketEngine, EquaForgeAerospace.Propulsion.EngineCluster, EquaForgeVC.Multibody.BodiesAndFrames.MassSum3, EquaForgeAerospace.Examples.StaticFire]
 figures: [../figures/tank.svg]
-validation: [unit.aerospace, examples.study.StarshipMission_Analysis]
+validation: [unit.aerospace, examples.study.StarVesselMission_Analysis]
 page_type: block
 ---
 ## Description
@@ -67,7 +67,7 @@ cylinder: $\tfrac12 m_l r^2$ about the axis and $m_l(3r^2+\ell^2)/12$ across it.
 
 `unit.aerospace` drains a tank at 100 kg/s and checks that the liquid falls by exactly what was
 drawn. The liquid fades out at the residual without going below zero, and the ullage pressure
-follows the ideal-gas law in the volume that the liquid has left. The `StarshipMission_Analysis`
+follows the ideal-gas law in the volume that the liquid has left. The `StarVesselMission_Analysis`
 worksheet closes the ascent's mass balance: the propellant drawn from the tanks matches the
 engines' integrated flow.
 
